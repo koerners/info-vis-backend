@@ -13,7 +13,7 @@ def get_data():
         if request.method == 'POST':
             kw_list = []
             for val in request.json.values():
-                if len(val) > 50:
+                if len(val) > 50 or len(val) < 1:
                     continue
                 kw_list.append(str(val))
             results = pd.DataFrame()
@@ -25,6 +25,7 @@ def get_data():
             for date in dates:
                 d = date.strftime("%Y-%m-%d")
                 d_ = date.strftime("%Y-%m-") + "01"
+
 
                 pytrends.build_payload(kw_list, timeframe=str(d_) + " " + str(d),
                                        geo='DE')
@@ -45,7 +46,8 @@ def get_data():
             return jsonify(results)
 
     except Exception as e:
-        return jsonify(e)
+        print(e)
+        return e
 
 
 if __name__ == '__main__':
