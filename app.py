@@ -16,25 +16,12 @@ def get_data():
                 if len(val) > 50 or len(val) < 1:
                     continue
                 kw_list.append(str(val))
-            results = pd.DataFrame()
-
-            dates = pd.date_range(start='2020-01-01', end="2021-01-01", freq='M')
 
             pytrends = TrendReq(hl='de-DE')
-
-            for date in dates:
-                d = date.strftime("%Y-%m-%d")
-                d_ = date.strftime("%Y-%m-") + "01"
-
-
-                pytrends.build_payload(kw_list, timeframe=str(d_) + " " + str(d),
-                                       geo='DE')
-
-                results = results.append(pytrends.interest_over_time())
-
+            pytrends.build_payload(kw_list, cat=0, timeframe='2020-01-01 2021-01-01', geo='DE', gprop='')
+            results = pytrends.interest_over_time()
             results = results.drop_duplicates()
             results.drop(columns=['isPartial'], inplace=True)
-
             results = results.resample("1d").median()
             results.interpolate(inplace=True)
             results.reset_index(inplace=True)
