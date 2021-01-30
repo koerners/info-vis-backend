@@ -34,6 +34,7 @@ pipenv run python app.py
 
 
 ### Docker + Let's Encrpyt
+Domain von ```infovis.skoerner.com``` auf eigene Domain ändern.
 ````
 $ sudo certbot certonly -d infovis.skoerner.com -n --standalone
 $ mkdir /home/stefan/certs
