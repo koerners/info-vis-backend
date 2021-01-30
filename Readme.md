@@ -20,6 +20,20 @@ $.ajax(settings).done(function (response) {
 
 ## Setup 
 
+### Lokal
+```
+pip install pipenv
+```
+
+```
+pipenv install
+```
+```
+pipenv run python app.py
+```
+
+
+### Docker + Let's Encrpyt
 ````
 $ sudo certbot certonly -d infovis.skoerner.com -n --standalone
 $ mkdir /home/stefan/certs
